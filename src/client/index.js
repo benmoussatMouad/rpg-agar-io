@@ -8,14 +8,14 @@ import { startCapturingInput, stopCapturingInput } from './input';
 import { downloadAssets } from './assets';
 import { initState } from './state';
 import { setLeaderboardHidden } from './leaderboard';
-
-const axios = require('axios').default;
-const Constants = require('../shared/constants');
 // I'm using a tiny subset of Bootstrap here for convenience - there's some wasted CSS,
 // but not much. In general, you should be careful using Bootstrap because it makes it
 // easy to unnecessarily bloat your site.
 import './css/bootstrap-reboot.css';
 import './css/main.css';
+
+const axios = require('axios').default;
+const Constants = require('../shared/constants');
 
 const playMenu = document.getElementById('play-menu');
 const createAccount = document.getElementById('createAccount');
@@ -70,13 +70,13 @@ function onGameOver() {
   playMenu.classList.remove('hidden');
   setLeaderboardHidden(true);
 }
-function onLoginSuccessful(){
+function onLoginSuccessful() {
   playMenu.classList.add('hidden');
   initState();
   startCapturingInput();
   startRendering();
   setLeaderboardHidden(false);
 }
-function onLoginFail(){
+function onLoginFail() {
   alert('Failed to login : username/password incorrect, or player already online.');
 }

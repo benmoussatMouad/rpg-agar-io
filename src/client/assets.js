@@ -1,5 +1,12 @@
 const ASSET_NAMES = [
-  'ship.svg',
+  'ship1.png',
+  'ship2.png',
+  'ship3.png',
+  'ship4.png',
+  'ship5.png',
+  'ship6.png',
+  'ship7.png',
+  'ship8.png',
   'bullet.svg',
 ];
 
