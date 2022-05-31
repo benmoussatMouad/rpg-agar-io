@@ -13,9 +13,13 @@
   "author": "Victor Zhou",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.21",
+    "pg": "^8.7.3",
     "shortid": "^2.2.16",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",

@@ -18,4 +18,5 @@ module.exports = Object.freeze({
     INPUT: 'input',
     GAME_OVER: 'dead',
   },
+  CLOUDDB: 'https://alog-persistency.herokuapp.com',
 });

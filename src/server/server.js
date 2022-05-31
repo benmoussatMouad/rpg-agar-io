@@ -2,7 +2,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const socketio = require('socket.io');
-
+const axios = require('axios').default;
 const Constants = require('../shared/constants');
 const Game = require('./game');
 const webpackConfig = require('../../webpack.dev.js');
@@ -28,20 +28,37 @@ console.log(`Server listening on port ${port}`);
 // Setup socket.io
 const io = socketio(server);
 
+// Setup the Game
+const game = new Game();
+
 // Listen for socket.io connections
 io.on('connection', socket => {
   console.log('Player connected!', socket.id);
-
   socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
   socket.on(Constants.MSG_TYPES.INPUT, handleInput);
   socket.on('disconnect', onDisconnect);
 });
 
-// Setup the Game
-const game = new Game();
 
-function joinGame(username) {
-  game.addPlayer(this, username);
+async function joinGame(username, password) {
+  const Url = `${Constants.CLOUDDB}/login`;
+  let requestResponse = null;
+  await axios.post(Url, {
+    username : username,
+    password : password,
+  }).then(response => {
+    requestResponse = Object.assign({}, response);
+  }).catch(error => {
+    console.log(error);
+    requestResponse = Object.assign({}, error);
+  });
+  console.log(requestResponse);
+  if (requestResponse.status === 200) {
+    console.log('TEST');
+    const player = requestResponse.data.user;
+    console.log(requestResponse);
+    game.addPlayer(this, player.username, player.x, player.y, player.hp, player.score);
+  }
 }
 
 function handleInput(dir) {

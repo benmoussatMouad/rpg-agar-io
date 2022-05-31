@@ -10,6 +10,11 @@ function onTouchInput(e) {
   const touch = e.touches[0];
   handleInput(touch.clientX, touch.clientY);
 }
+function onSpacebarInput(e) {
+  let name = e.key;
+  let code = e.code;
+
+}
 
 function handleInput(x, y) {
   const dir = Math.atan2(x - window.innerWidth / 2, window.innerHeight / 2 - y);
@@ -21,6 +26,7 @@ export function startCapturingInput() {
   window.addEventListener('click', onMouseInput);
   window.addEventListener('touchstart', onTouchInput);
   window.addEventListener('touchmove', onTouchInput);
+  window.addEventListener('keyup', event => onSpacebarInput(event));
 }
 
 export function stopCapturingInput() {

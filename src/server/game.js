@@ -1,6 +1,7 @@
 const Constants = require('../shared/constants');
 const Player = require('./player');
 const applyCollisions = require('./collisions');
+const {default: axios} = require('axios');
 
 class Game {
   constructor() {
@@ -12,16 +13,29 @@ class Game {
     setInterval(this.update.bind(this), 1000 / 60);
   }
 
-  addPlayer(socket, username) {
+  addPlayer(socket, username, x, y, hp, score) {
     this.sockets[socket.id] = socket;
 
     // Generate a position to start this player at.
-    const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
-    const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
-    this.players[socket.id] = new Player(socket.id, username, x, y);
+    // const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
+    // const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
+    this.players[socket.id] = new Player(socket.id, username, x, y, hp, score);
   }
 
-  removePlayer(socket) {
+  async removePlayer(socket) {
+    const Url = `${Constants.CLOUDDB}/disconnect`;
+    const player = this.players[socket.id];
+    if (player !== undefined) {
+      await axios.patch(Url, {
+        username: player.username,
+        x: player.x,
+        y: player.y,
+        hp: player.hp,
+        score: Math.trunc(player.score),
+      }).then().catch(error => {
+        console.log(error);
+      });
+    }
     delete this.sockets[socket.id];
     delete this.players[socket.id];
   }
@@ -70,9 +84,21 @@ class Game {
     Object.keys(this.sockets).forEach(playerID => {
       const socket = this.sockets[playerID];
       const player = this.players[playerID];
+      const Url = `${Constants.CLOUDDB}/brokenShip`;
       if (player.hp <= 0) {
+        const playerCopy = JSON.parse(JSON.stringify(player));
+        axios.patch(Url, {
+          username: playerCopy.username,
+          x: playerCopy.x,
+          y: playerCopy.y,
+        }).then(result => {
+          console.log(result);
+        }).catch(error => {
+          console.log(error);
+        });
         socket.emit(Constants.MSG_TYPES.GAME_OVER);
-        this.removePlayer(socket);
+        delete this.sockets[socket.id];
+        delete this.players[socket.id];
       }
     });
 
