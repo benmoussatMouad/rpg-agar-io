@@ -19,6 +19,7 @@ module.exports = Object.freeze({
     INPUT: 'input',
     GAME_OVER: 'dead',
     FIX: 'fix_ship',
+    CREATE_ACCOUNT: 'create_account',
   },
   CLOUDDB: 'https://alog-persistency.herokuapp.com',
 });

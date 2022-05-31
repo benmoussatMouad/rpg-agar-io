@@ -20,20 +20,23 @@
 <body>
   <canvas id="game-canvas"></canvas>
   <div id="play-menu" class="hidden">
-    <h1>RPG IO Game</h1>
+    <h1>Software Architecture Project Demo</h1>
     <p>
       Stay alive and shoot other players.
       <br />
       Use your mouse to move.
+      <br />
+      Press Spacebar to fix your spaceship (costs 100 points).
     </p>
     <hr />
     <p>
       <!-- <br /> -->
-      Read the tutorial: <a href="https://victorzhou.com/blog/build-an-io-game-part-1/" target="_blank">How to Build an .io Game</a>.
+      Forked from<a href="https://victorzhou.com">Victor Zhou</a>'s
+      "<a href="https://github.com/vzhou842/example-.io-game" target="_blank">example .io game</a>".
       <br />
-      See the source code on <a href="https://github.com/vzhou842/example-.io-game" target="_blank">Github</a>.
+      Modified to feature persistent accounts and player data (HP, position, and score).
       <br />
-      Created by <a href="https://victorzhou.com">Victor Zhou</a>.
+      Find the source code on
     </p>
     <hr />
     <input type="text" id="username-input" placeholder="Username" />
@@ -41,7 +44,7 @@
     <button id="play-button">PLAY</button>
     <button id="newAccount-button">NEW ACCOUNT</button>
   </div>
-  <div id="createAccount" class="hidden">
+  <div id="createAccountMenu" class="hidden">
   <h1>Create an account</h1>
     <div class="container" style="display: flex">
       <img src="/assets/ship1.png" style="width: 25%;">

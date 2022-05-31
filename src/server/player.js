@@ -48,8 +48,9 @@ class Player extends ObjectClass {
       hp: this.hp,
     };
   }
+
   fixShip() {
-    if (this.score >= 100){
+    if (this.score >= 100) {
       this.score -= 100;
       this.hp = Math.min(this.hp + 10, Constants.PLAYER_MAX_HP);
     }

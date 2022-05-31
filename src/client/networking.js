@@ -41,3 +41,8 @@ export const updateDirection = throttle(20, dir => {
 export const fixShip = throttle(100, () => {
   socket.emit(Constants.MSG_TYPES.FIX);
 });
+
+export function createAccount(username, password) {
+    socket.emit(Constants.MSG_TYPES.CREATE_ACCOUNT, username, password);
+    return (socket);
+};
