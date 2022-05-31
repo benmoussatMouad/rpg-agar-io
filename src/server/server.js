@@ -37,6 +37,7 @@ io.on('connection', socket => {
   socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
   socket.on(Constants.MSG_TYPES.INPUT, handleInput);
   socket.on(Constants.MSG_TYPES.FIX, handleFix);
+  socket.on(Constants.MSG_TYPES.CREATE_ACCOUNT, createAccount);
   socket.on('disconnect', onDisconnect);
 });
 
@@ -57,7 +58,7 @@ async function joinGame(username, password) {
   if (requestResponse.status === 200) {
     const player = requestResponse.data.user;
     console.log(requestResponse);
-    game.addPlayer(this, player.username, player.x, player.y, player.hp, player.score);
+    game.addPlayer(this, player.username, player.x, player.y, player.hp, player.score, p);
     this.emit('login_success');
   } else this.emit('login_error');
 }
@@ -71,4 +72,18 @@ function handleFix() {
 
 function onDisconnect() {
   game.removePlayer(this);
+}
+
+function createAccount(username, password) {
+  const Url = `${Constants.CLOUDDB}/createAccount`;
+  axios.post(Url, {
+    username: username,
+    password: password,
+  }).then(response => {
+    console.log(response);
+    this.emit('account_creation_successful');
+  }).catch(error => {
+    console.log(error);
+    this.emit('account_creation_failure');
+  });
 }

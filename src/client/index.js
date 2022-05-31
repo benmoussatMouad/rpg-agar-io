@@ -2,7 +2,7 @@
 // https://victorzhou.com/blog/build-an-io-game-part-1/#3-client-entrypoints
 // eslint-disable-next-line import/order
 
-import { connect, play } from './networking';
+import { connect, play, createAccount } from './networking';
 import { startRendering, stopRendering } from './render';
 import { startCapturingInput, stopCapturingInput } from './input';
 import { downloadAssets } from './assets';
@@ -18,7 +18,7 @@ import './css/bootstrap-reboot.css';
 import './css/main.css';
 
 const playMenu = document.getElementById('play-menu');
-const createAccount = document.getElementById('createAccount');
+const createAccountMenu = document.getElementById('createAccountMenu');
 const backButton = document.getElementById('back-button');
 const playButton = document.getElementById('play-button');
 const usernameInput = document.getElementById('username-input');
@@ -43,23 +43,19 @@ Promise.all([
   };
   newAccountButton.onclick = () => {
     playMenu.classList.add('hidden');
-    createAccount.classList.remove('hidden');
+    createAccountMenu.classList.remove('hidden');
   };
   backButton.onclick = () => {
     playMenu.classList.remove('hidden');
-    createAccount.classList.add('hidden');
+    createAccountMenu.classList.add('hidden');
   };
   createAccountButton.onclick = () => {
-    const Url = `${Constants.CLOUDDB}/createAccount`;
-    axios.post(Url, {
-      username: newUsernameInput.value,
-      password: newPasswordInput.value,
-    }).then(response => {
-      console.log(response);
+    const socket = createAccount(newUsernameInput.value, newPasswordInput.value);
+    socket.on('account_creation_successful', () => {
       alert('Account created successfully');
-    }).catch(error => {
-      console.log(error);
-      alert(error.response.data.message);
+    });
+    socket.on('account_creation_failure', () => {
+      alert('Failed to create account : try a different username');
     });
   };
 }).catch(console.error);
@@ -70,13 +66,13 @@ function onGameOver() {
   playMenu.classList.remove('hidden');
   setLeaderboardHidden(true);
 }
-function onLoginSuccessful(){
+function onLoginSuccessful() {
   playMenu.classList.add('hidden');
   initState();
   startCapturingInput();
   startRendering();
   setLeaderboardHidden(false);
 }
-function onLoginFail(){
+function onLoginFail() {
   alert('Failed to login : username/password incorrect, or player already online.');
 }
