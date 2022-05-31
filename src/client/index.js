@@ -23,6 +23,7 @@ const backButton = document.getElementById('back-button');
 const playButton = document.getElementById('play-button');
 const usernameInput = document.getElementById('username-input');
 const passwordInput = document.getElementById('password-input');
+const avatarInput = document.getElementById('avatar-input');
 const newAccountButton = document.getElementById('newAccount-button');
 const newUsernameInput = document.getElementById('newUsername-input');
 const newPasswordInput = document.getElementById('newPassword-input');
@@ -50,7 +51,7 @@ Promise.all([
     createAccountMenu.classList.add('hidden');
   };
   createAccountButton.onclick = () => {
-    const socket = createAccount(newUsernameInput.value, newPasswordInput.value);
+    const socket = createAccount(newUsernameInput.value, newPasswordInput.value, avatarInput.value);
     socket.on('account_creation_successful', () => {
       alert('Account created successfully');
     });

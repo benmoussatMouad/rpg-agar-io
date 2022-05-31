@@ -36,7 +36,7 @@
       <br />
       Modified to feature persistent accounts and player data (HP, position, and score).
       <br />
-      Find the source code on
+      Find the source code on <a href="https://github.com/benmoussatMouad/rpg-agar-io">Github</a>
     </p>
     <hr />
     <input type="text" id="username-input" placeholder="Username" />
@@ -46,16 +46,33 @@
   </div>
   <div id="createAccountMenu" class="hidden">
   <h1>Create an account</h1>
-    <div class="container" style="display: flex">
-      <img src="/assets/ship1.png" style="width: 25%;">
-      <img src="/assets/ship2.png" style="width: 25%;">
-      <img src="/assets/ship3.png" style="width: 25%;">
-      <img src="/assets/ship4.png" style="width: 25%;">
-      <img src="/assets/ship5.png" style="width: 25%;">
-      <img src="/assets/ship6.png" style="width: 25%;">
-      <img src="/assets/ship7.png" style="width: 25%;">
-      <img src="/assets/ship8.png" style="width: 25%;">
+    <h2>Select a ship</h2>
+
+    <div class="container" style="display: flex; flex-wrap: wrap">
+      <div style="width: 25%;">
+        <img src="/assets/ship1.png" width="80%">
+      </div>
+      <div style="width: 25%;">
+        <img src="/assets/ship2.png" width="80%">
+      </div>
+      <div style="width: 25%;"><img src="/assets/ship3.png" width="80%"></div>
+
+      <div style="width: 25%"><img src="/assets/ship4.png" width="80%"></div>
+      <div style="width: 25%"><img src="/assets/ship5.png" width="80%"></div>
+      <div style="width: 25%"><img src="/assets/ship6.png" width="80%"></div>
+      <div style="width: 25%"><img src="/assets/ship7.png" width="80%"></div>
+      <div style="width: 25%"><img src="/assets/ship8.png" width="80%"></div>
     </div>
+    <select id="avatar-input">
+      <option value="ship1.png">Ship 1</option>
+      <option value="ship2.png">Ship 2</option>
+      <option value="ship3.png">Ship 3</option>
+      <option value="ship4.png">Ship 4</option>
+      <option value="ship5.png">Ship 5</option>
+      <option value="ship6.png">Ship 6</option>
+      <option value="ship7.png">Ship 7</option>
+      <option value="ship8.png">Ship 8</option>
+    </select>
     <input type="text" name="username" id="newUsername-input" placeholder="Username" /><br/>
     <input type="password" name="password" id="newPassword-input" placeholder="Password"><br/>
     <button id="createAccount-button">CREATE</button><br/>

@@ -73,7 +73,7 @@ button:focus {
   outline: none;
 }
 
-#createAccount {
+#createAccountMenu {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -87,11 +87,11 @@ button:focus {
   text-align: center;
 }
 
-#createAccount p {
+#createAccountMenu p {
   margin-bottom: 0;
 }
 
-#createAccount input {
+#createAccountMenu input {
   font-size: 18px;
   outline: none;
   border: none;
@@ -101,7 +101,7 @@ button:focus {
   text-align: center;
 }
 
-#createAccount input:hover {
+#createAccountMenu input:hover {
   outline: none;
 }
 
@@ -158,7 +158,7 @@ button:focus {
     min-width: 280px;
   }
 
-  #createAccount {
+  #createAccountMenu {
     padding: 10px 15px;
     min-width: 280px;
   }

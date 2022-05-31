@@ -32,7 +32,7 @@ export const connect = onGameOver => (
 export function play(username, password) {
   socket.emit(Constants.MSG_TYPES.JOIN_GAME, username, password);
   return (socket);
-};
+}
 
 export const updateDirection = throttle(20, dir => {
   socket.emit(Constants.MSG_TYPES.INPUT, dir);
@@ -42,7 +42,7 @@ export const fixShip = throttle(100, () => {
   socket.emit(Constants.MSG_TYPES.FIX);
 });
 
-export function createAccount(username, password) {
-    socket.emit(Constants.MSG_TYPES.CREATE_ACCOUNT, username, password);
-    return (socket);
-};
+export function createAccount(username, password, avatar) {
+  socket.emit(Constants.MSG_TYPES.CREATE_ACCOUNT, username, password, avatar);
+  return (socket);
+}

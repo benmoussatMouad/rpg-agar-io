@@ -58,7 +58,8 @@ async function joinGame(username, password) {
   if (requestResponse.status === 200) {
     const player = requestResponse.data.user;
     console.log(requestResponse);
-    game.addPlayer(this, player.username, player.x, player.y, player.hp, player.score, p);
+    game.addPlayer(this,
+      player.username, player.x, player.y, player.hp, player.score, player.avatar);
     this.emit('login_success');
   } else this.emit('login_error');
 }
@@ -74,11 +75,12 @@ function onDisconnect() {
   game.removePlayer(this);
 }
 
-function createAccount(username, password) {
+function createAccount(username, password, avatar) {
   const Url = `${Constants.CLOUDDB}/createAccount`;
   axios.post(Url, {
     username: username,
     password: password,
+    avatar: avatar,
   }).then(response => {
     console.log(response);
     this.emit('account_creation_successful');
