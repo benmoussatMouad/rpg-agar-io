@@ -1,7 +1,7 @@
+const { default: axios } = require('axios');
 const Constants = require('../shared/constants');
 const Player = require('./player');
 const applyCollisions = require('./collisions');
-const {default: axios} = require('axios');
 
 class Game {
   constructor() {
@@ -43,6 +43,12 @@ class Game {
   handleInput(socket, dir) {
     if (this.players[socket.id]) {
       this.players[socket.id].setDirection(dir);
+    }
+  }
+
+  handleFix(socket) {
+    if (this.players[socket.id]) {
+      this.players[socket.id].fixShip();
     }
   }
 

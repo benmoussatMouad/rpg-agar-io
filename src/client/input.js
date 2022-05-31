@@ -1,6 +1,6 @@
 // Learn more about this file at:
 // https://victorzhou.com/blog/build-an-io-game-part-1/#6-client-input-%EF%B8%8F
-import { updateDirection } from './networking';
+import { updateDirection, fixShip } from './networking';
 
 function onMouseInput(e) {
   handleInput(e.clientX, e.clientY);
@@ -11,9 +11,9 @@ function onTouchInput(e) {
   handleInput(touch.clientX, touch.clientY);
 }
 function onSpacebarInput(e) {
-  let name = e.key;
-  let code = e.code;
-
+  if (e.code === 'Space'){
+    fixShip();
+  }
 }
 
 function handleInput(x, y) {
@@ -34,4 +34,5 @@ export function stopCapturingInput() {
   window.removeEventListener('click', onMouseInput);
   window.removeEventListener('touchstart', onTouchInput);
   window.removeEventListener('touchmove', onTouchInput);
+  window.removeEventListener('keyup', event => onSpacebarInput(event));
 }

@@ -36,6 +36,7 @@ io.on('connection', socket => {
   console.log('Player connected!', socket.id);
   socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
   socket.on(Constants.MSG_TYPES.INPUT, handleInput);
+  socket.on(Constants.MSG_TYPES.FIX, handleFix);
   socket.on('disconnect', onDisconnect);
 });
 
@@ -63,6 +64,9 @@ async function joinGame(username, password) {
 
 function handleInput(dir) {
   game.handleInput(this, dir);
+}
+function handleFix() {
+  game.handleFix(this);
 }
 
 function onDisconnect() {
