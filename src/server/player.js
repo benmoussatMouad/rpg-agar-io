@@ -9,6 +9,7 @@ class Player extends ObjectClass {
     this.hp = hp;
     this.fireCooldown = 0;
     this.score = score;
+    this.avatar = Constants.AVATAR_DEFAULT;
   }
 
   // Returns a newly created bullet, or null.
