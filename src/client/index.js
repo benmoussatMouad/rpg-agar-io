@@ -37,12 +37,9 @@ Promise.all([
   usernameInput.focus();
   playButton.onclick = () => {
     // Play!
-    play(usernameInput.value, passwordInput.value);
-    playMenu.classList.add('hidden');
-    initState();
-    startCapturingInput();
-    startRendering();
-    setLeaderboardHidden(false);
+    const socket = play(usernameInput.value, passwordInput.value);
+    socket.on('login_success', onLoginSuccessful);
+    socket.on('login_error', onLoginFail);
   };
   newAccountButton.onclick = () => {
     playMenu.classList.add('hidden');
@@ -72,4 +69,14 @@ function onGameOver() {
   stopRendering();
   playMenu.classList.remove('hidden');
   setLeaderboardHidden(true);
+}
+function onLoginSuccessful(){
+  playMenu.classList.add('hidden');
+  initState();
+  startCapturingInput();
+  startRendering();
+  setLeaderboardHidden(false);
+}
+function onLoginFail(){
+  alert('Failed to login : username/password incorrect, or player already online.');
 }

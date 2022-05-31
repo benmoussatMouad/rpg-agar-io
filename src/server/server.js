@@ -54,11 +54,11 @@ async function joinGame(username, password) {
   });
   console.log(requestResponse);
   if (requestResponse.status === 200) {
-    console.log('TEST');
     const player = requestResponse.data.user;
     console.log(requestResponse);
     game.addPlayer(this, player.username, player.x, player.y, player.hp, player.score);
-  }
+    this.emit('login_success');
+  } else this.emit('login_error');
 }
 
 function handleInput(dir) {

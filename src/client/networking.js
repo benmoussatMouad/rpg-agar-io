@@ -30,12 +30,9 @@ export const connect = onGameOver => (
   })
 );
 
-export const play = (username, password) => {
+export function play(username, password) {
   socket.emit(Constants.MSG_TYPES.JOIN_GAME, username, password);
-  /* socket.on('login_error', (msg) => {
-      alert(msg);
-  })
-  */
+  return (socket);
 };
 
 export const updateDirection = throttle(20, dir => {
