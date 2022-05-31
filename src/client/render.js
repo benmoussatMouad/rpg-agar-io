@@ -18,7 +18,7 @@ function setCanvasDimensions() {
   // 800 in-game units of width.
   const scaleRatio = Math.max(1, 800 / window.innerWidth);
   canvas.width = scaleRatio * window.innerWidth;
-  canvas.height = scaleRatio * window.innerHeight / 1.5;
+  canvas.height = scaleRatio * window.innerHeight;
 }
 
 window.addEventListener('resize', debounce(40, setCanvasDimensions));
